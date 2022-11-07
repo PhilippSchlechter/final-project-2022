@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
   /* useCallback: only updates function if necessary */
   const refreshUserProfile = useCallback(async () => {
     /* this fetch is sending our cookies */
-    const profileResponse = await fetch('/api/profile');
+    const profileResponse = await fetch('/api/profiles');
     const profileResponseBody = await profileResponse.json();
     /* if there are errors -> undefined
       else -> user profile */

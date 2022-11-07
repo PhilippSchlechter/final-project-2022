@@ -84,7 +84,7 @@ export default function BooksAdmin(props: Props) {
   async function deleteBookFromApiById(id: number) {
     const response = await fetch(`/api/books/${id}`, {
       method: 'DELETE',
-      /* body: JSON.stringify({ csrfToken: props.csrfToken }), */
+      body: JSON.stringify({ id: id }),
     });
     const deletedBook = (await response.json()) as Book;
 
@@ -146,7 +146,7 @@ export default function BooksAdmin(props: Props) {
       </Head>
 
       <h1 css={h1Styles}>Bookshelf</h1>
-      <div /* css={createBookStyles} */>
+      <div>
         <label>
           Author
           <br />

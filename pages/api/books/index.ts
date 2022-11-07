@@ -6,8 +6,6 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
-  console.log('session is passed', request.cookies.sessionToken);
-
   const session =
     request.cookies.sessionToken &&
     (await getValidSessionByToken(request.cookies.sessionToken));
@@ -36,7 +34,7 @@ export default async function handler(
     const author = request.body?.author;
     const title = request.body?.title;
 
-    // Check all the information to create the animal exists
+    // Check all the information to create the book exists
     if (!(author && title)) {
       return response
         .status(400)
@@ -45,7 +43,7 @@ export default async function handler(
 
     // TODO: add type checking to the api
 
-    // Create the animal using the database util function
+    // Create the book using the database util function
     const newBook = await createBook(author, title);
 
     // response with the new created book

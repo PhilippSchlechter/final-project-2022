@@ -28,9 +28,6 @@ export default function UserProfile(props: Props) {
       <h1>Personal Information</h1>
       username: {props.user.username}
       <hr />
-      THIS IS NOT FUNCTINAL BUT AN EXAMPLE
-      <br />
-      <button>Delete User</button>
     </>
   );
 }

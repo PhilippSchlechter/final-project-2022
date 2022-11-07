@@ -49,7 +49,7 @@ export default function Login(props: Props) {
     // refresh the user on state
     await props.refreshUserProfile();
     // redirect user to user profile
-    await router.push(`/admin`);
+    await router.push(`/bookshelf`);
   }
 
   return (

@@ -35,6 +35,7 @@
     "@typescript-eslint/parser": "5.40.1",
     "@upleveled/eslint-config-upleveled": "^3.3.8",
     "@upleveled/eslint-plugin-upleveled": "2.1.6",
+    "autoprefixer": "^10.4.13",
     "eslint": "8.25.0",
     "eslint-config-next": "13.0.0",
     "eslint-config-react-app": "7.0.1",
@@ -50,6 +51,8 @@
     "eslint-plugin-sonarjs": "0.16.0",
     "eslint-plugin-testing-library": "5.9.0",
     "eslint-plugin-unicorn": "44.0.2",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.2.0",
     "typescript": "4.8.4"
   },
   "resolutions": {

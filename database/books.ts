@@ -14,7 +14,7 @@ export async function getBooks() {
   return books;
 }
 
-// Get a single animal by id
+// Get a single book by id
 export async function getBookById(id: number) {
   const [book] = await sql<Book[]>`
     SELECT

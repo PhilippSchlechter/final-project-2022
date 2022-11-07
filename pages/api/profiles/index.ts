@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getValidSessionByToken } from '../../database/sessions';
-import { getUserBySessionToken } from '../../database/users';
+import { getValidSessionByToken } from '../../../database/sessions';
+import { getUserBySessionToken } from '../../../database/users';
 
 export default async function handler(
   request: NextApiRequest,
