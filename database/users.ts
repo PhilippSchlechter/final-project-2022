@@ -78,6 +78,18 @@ export async function createUser(username: string, password_hash: string) {
   return userWithoutPassword!;
 }
 
+export async function getUserById(id: number) {
+  const [user] = await sql<User[]>`
+  SELECT
+    users.id
+  FROM
+    users
+  WHERE
+    id = ${id}
+`;
+  return user;
+}
+
 export async function deleteUserById(id: number) {
   const [user] = await sql<User[]>`
     DELETE FROM

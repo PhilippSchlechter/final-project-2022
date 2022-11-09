@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createBook, getBooks } from '../../../database/books';
 import { getValidSessionByToken } from '../../../database/sessions';
+import { createBookByUserId } from '../../../database/user_books';
+import { getUserById } from '../../../database/users';
 
 export default async function handler(
   request: NextApiRequest,
@@ -19,7 +21,6 @@ export default async function handler(
 
   if (request.method === 'GET') {
     const books = await getBooks();
-
     return response.status(200).json(books);
   }
 
@@ -33,6 +34,7 @@ export default async function handler(
 
     const author = request.body?.author;
     const title = request.body?.title;
+    const userId = request.body?.id;
 
     // Check all the information to create the book exists
     if (!(author && title)) {
@@ -42,9 +44,10 @@ export default async function handler(
     }
 
     // TODO: add type checking to the api
-
     // Create the book using the database util function
-    const newBook = await createBook(author, title);
+
+    const newBook = await createBookByUserId(author, title, userId);
+    console.log('new Book', newBook);
 
     // response with the new created book
     return response.status(200).json(newBook);

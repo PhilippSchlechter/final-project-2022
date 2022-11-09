@@ -11,7 +11,6 @@ export default async function handler(
     const session =
       request.cookies.sessionToken &&
       (await getValidSessionByToken(request.cookies.sessionToken));
-
     if (!session) {
       response
         .status(400)

@@ -6,6 +6,10 @@ export type Book = {
   title: string;
 };
 
+export type User = {
+  user_id: number;
+};
+
 // Get all books
 export async function getBooks() {
   const books = await sql<Book[]>`

@@ -5,11 +5,13 @@ import { Book, getBookById } from '../../database/books';
 import { parseIntFromContextQuery } from '../../utils/contextQuery';
 
 const bookStyles = css`
+  height: 1000px;
+  width: 650px;
   border-radius: 15px;
-
+  border: 2px solid #ccc;
   padding: 20px;
-  h2 {
-    margin-top: 0;
+  h1 {
+    margin-top: 50px;
   }
   & + & {
     margin-top: 25px;
@@ -38,7 +40,7 @@ export default function SingleBook(props: Props) {
   }
 
   return (
-    <div css={bookStyles}>
+    <div>
       <Head>
         <title>
           {props.book.author}, the {props.book.title}
@@ -48,9 +50,13 @@ export default function SingleBook(props: Props) {
           content={`${props.book.author} is a ${props.book.title}`}
         />
       </Head>
-      <h2>
-        {props.book.author} - {props.book.title}
-      </h2>
+      <div css={bookStyles}>
+        <h1>{props.book.title}</h1>
+        <h2>{props.book.author}</h2>
+        <h3>Description</h3>
+        <h3>Rating</h3>
+        <h3>Key Takeaways</h3>
+      </div>
     </div>
   );
 }
