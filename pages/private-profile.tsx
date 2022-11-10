@@ -1,15 +1,17 @@
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
-import { Book } from '../database/books';
+import { Book, getBooksByUserId } from '../database/books';
 import { getValidSessionByToken } from '../database/sessions';
 import { getUserBySessionToken, User } from '../database/users';
 
 type Props = {
   user?: User;
+  books: Book[];
   refreshUserProfile: () => Promise<void>;
   errors: { message: string }[];
 };
@@ -24,6 +26,7 @@ const inputDisplayStyles = css`
   margin-left: 5px;
   margin-top: 3px;
   border-radius: 4px;
+
   border: 1px solid #ccc;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
   color: black;
@@ -40,8 +43,8 @@ const buttonStyles = css`
 const bookListStyles = css`
   border: 1px solid #ccc;
   border-radius: 7px;
-  width: auto;
-  height: 400px;
+  width: 850px;
+  height: 700px;
   margin: 0 auto;
   padding: 20px 0 0 200px;
 `;
@@ -50,13 +53,17 @@ const bookListStyles = css`
 `; */
 
 const h1Styles = css`
-  padding: 20px 0 30px 350px;
+  padding: 20px 0 30px 20px;
+`;
+
+const deleteStyles = css`
+  padding: 20px 50px 30px 350px;
 `;
 
 export default function UserProfile(props: Props) {
   const router = useRouter();
 
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<Book[]>(props.books);
   const [authorInput, setAuthorInput] = useState('');
   const [titleInput, setTitleInput] = useState('');
 
@@ -64,7 +71,7 @@ export default function UserProfile(props: Props) {
   const [titleOnEditInput, setTitleOnEditInput] = useState('');
   const [onEditId, setOnEditId] = useState<number | undefined>();
 
-  async function getBooksFromApi() {
+  /* async function getBooksFromApi() {
     const response = await fetch('/api/books');
     const booksFromApi = await response.json();
 
@@ -74,7 +81,7 @@ export default function UserProfile(props: Props) {
     getBooksFromApi().catch((err) => {
       console.log(err);
     });
-  }, []);
+  }, []); */
 
   if (!props.user) {
     return (
@@ -178,16 +185,13 @@ export default function UserProfile(props: Props) {
   return (
     <>
       <Head>
-        <title>Personal Information</title>
-        <meta name="description" content="Biography of the person" />
+        <title>Bookshelf</title>
+        <meta name="description" content="Private bookshelf of the user" />
       </Head>
-      <h1>Personal Information</h1>
-      username: {props.user.username}
-      <button onClick={() => deleteUserFromApiById(props.user!.id)}>
-        delete
-      </button>
+      <h1 css={h1Styles}>{props.user.username}'s Bookshelf</h1>
+
       {/* Admin input down below */}
-      <h1 css={h1Styles}>Bookshelf</h1>
+
       <div>
         <label>
           Author
@@ -219,7 +223,7 @@ export default function UserProfile(props: Props) {
             await createBookFromApi();
           }}
         >
-          create book
+          add book
         </button>
       </div>
       <br />
@@ -282,6 +286,17 @@ export default function UserProfile(props: Props) {
           );
         })}
       </div>
+
+      <Image src="/1-bookshelf.png" alt="" width="200" height="200" />
+      <div css={deleteStyles}>
+        Delete Account:
+        <button
+          css={buttonStyles}
+          onClick={() => deleteUserFromApiById(props.user!.id)}
+        >
+          delete
+        </button>
+      </div>
     </>
   );
 }
@@ -292,12 +307,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const token = context.req.cookies.sessionToken;
   const session = token && (await getValidSessionByToken(token));
   const user = token && (await getUserBySessionToken(token));
-
-  if (!session) {
-    context.res.statusCode = 401;
-    return { props: { errors: [{ message: 'User not authorized' }] } };
-  }
-
   if (!user) {
     return {
       redirect: {
@@ -306,8 +315,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       },
     };
   }
+  const books = await getBooksByUserId(user.id);
+
+  if (!session) {
+    context.res.statusCode = 401;
+    return { props: { errors: [{ message: 'User not authorized' }] } };
+  }
 
   return {
-    props: { user },
+    props: { user, books },
   };
 }

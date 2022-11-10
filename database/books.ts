@@ -4,16 +4,42 @@ export type Book = {
   id: number;
   author: string;
   title: string;
+  userId: number;
+  comment: string;
 };
 
 export type User = {
-  user_id: number;
+  userId: number;
 };
 
 // Get all books
 export async function getBooks() {
   const books = await sql<Book[]>`
     SELECT * FROM books
+  `;
+  return books;
+}
+// Get a single book by userId
+export async function getBooksByUserId(userId: number) {
+  const books = await sql<Book[]>`
+    SELECT
+      *
+    FROM
+      books
+    WHERE
+      user_id = ${userId}
+  `;
+  return books;
+}
+
+export async function getBookCommentByUserId(userId: number) {
+  const books = await sql<Book[]>`
+    SELECT
+      books.comment
+    FROM
+      books
+    WHERE
+      user_id = ${userId}
   `;
   return books;
 }
@@ -63,6 +89,20 @@ export async function createBook(author: string, title: string) {
     RETURNING *
   `;
   return book;
+}
+// create book comment, description for a specific book of yours
+
+export async function createCommentByBookId(id: number, comment: string ) {
+  const [userBookComment] = await sql<Book[]>`
+    UPDATE
+      books
+    SET
+     comment = ${comment}
+    WHERE
+    id = ${id}
+    RETURNING *
+  `;
+  return userBookComment;
 }
 
 export async function updateBookById(

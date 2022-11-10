@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createBook, getBooks } from '../../../database/books';
+import { getBooks, getBooksByUserId } from '../../../database/books';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { createBookByUserId } from '../../../database/user_books';
-import { getUserById } from '../../../database/users';
 
 export default async function handler(
   request: NextApiRequest,
@@ -20,6 +19,7 @@ export default async function handler(
   }
 
   if (request.method === 'GET') {
+    /* const books = await getBooksByUserId(session.token); */
     const books = await getBooks();
     return response.status(200).json(books);
   }

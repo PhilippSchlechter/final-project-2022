@@ -43,8 +43,10 @@ const bookListStyles = css`
 const h1Styles = css`
   padding: 20px 0 30px 350px;
 `;
-
-export default function BooksAdmin(props: Props) {
+export default function Hi() {
+  return <div>df</div>;
+}
+/* export default function BooksAdmin(props: Props) {
   const [books, setBooks] = useState<Book[]>([]);
   const [authorInput, setAuthorInput] = useState('');
   const [titleInput, setTitleInput] = useState('');
@@ -242,7 +244,7 @@ export default function BooksAdmin(props: Props) {
       </div>
     </>
   );
-}
+} */
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   // Retrieve the username from the URL

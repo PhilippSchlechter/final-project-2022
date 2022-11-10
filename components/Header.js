@@ -43,8 +43,8 @@ export default function Header(props) {
             height="15"
           /> */}
           <Link href="/"> Home</Link>
-          <Link href="/bookshelf">🕮 Bookshelf</Link>
-          <Link href="/private-profile">Profile </Link>
+          <Link href={`/profile/${props.user?.username}`}>Profile</Link>
+          <Link href="/private-profile">🕮 Bookshelf</Link>
         </div>
         {props.user && props.user.username}
         {props.user ? (
