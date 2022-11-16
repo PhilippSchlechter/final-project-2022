@@ -1,12 +1,12 @@
-import { css } from '@emotion/react';
+/* import { css } from '@emotion/react'; */
 import { GetServerSidePropsContext } from 'next';
-import Head from 'next/head';
+/* import Head from 'next/head';
 import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
-import { Book } from '../database/books';
+import { Book } from '../database/books'; */
 import { getValidSessionByToken } from '../database/sessions';
 
-type Props = {
+/* type Props = {
   errors: { message: string }[];
 };
 
@@ -35,17 +35,17 @@ const bookListStyles = css`
   height: 400px;
   margin: 0 auto;
   padding: 20px 0 0 200px;
-`;
+`; */
 /* const createBookStyles = css`
   padding: 20px 0 0 200px;
 `; */
 
-const h1Styles = css`
+/* const h1Styles = css`
   padding: 20px 0 30px 350px;
-`;
-export default function Hi() {
+`; */
+/* export default function Hi() {
   return <div>df</div>;
-}
+} */
 /* export default function BooksAdmin(props: Props) {
   const [books, setBooks] = useState<Book[]>([]);
   const [authorInput, setAuthorInput] = useState('');

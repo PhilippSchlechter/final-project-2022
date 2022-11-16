@@ -1,7 +1,13 @@
 import '../styles/globals.css';
 import { css, Global } from '@emotion/react';
+import { Comfortaa } from '@next/font/google';
 import { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+
+const comfortaa = Comfortaa({
+  subsets: ['latin'],
+  variable: '--font-comfortaa',
+});
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState();
@@ -33,10 +39,11 @@ function MyApp({ Component, pageProps }) {
           *::after {
             box-sizing: border-box;
           }
+          html,
           body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-              Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-              sans-serif;
+            padding: 0;
+            margin: 0;
+            font-family: font-sans comfortaa;
           }
           a {
             text-decoration: none;
@@ -46,9 +53,11 @@ function MyApp({ Component, pageProps }) {
       />
 
       {/* layout component wraped around */}
-      <Layout user={user}>
-        <Component {...pageProps} refreshUserProfile={refreshUserProfile} />
-      </Layout>
+      <main className={`${comfortaa.variable} font-sans`}>
+        <Layout user={user}>
+          <Component {...pageProps} refreshUserProfile={refreshUserProfile} />
+        </Layout>
+      </main>
     </>
   );
 }

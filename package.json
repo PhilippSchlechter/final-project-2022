@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
+    "@headlessui/react": "^1.7.4",
+    "@heroicons/react": "^2.0.13",
+    "@next/font": "^13.0.3",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie": "^0.5.1",
     "bcrypt": "^5.1.0",
@@ -33,7 +36,7 @@
     "@types/react-dom": "18.0.6",
     "@typescript-eslint/eslint-plugin": "5.40.1",
     "@typescript-eslint/parser": "5.40.1",
-    "@upleveled/eslint-config-upleveled": "^3.3.8",
+    "@upleveled/eslint-config-upleveled": "^3.3.9",
     "@upleveled/eslint-plugin-upleveled": "2.1.6",
     "autoprefixer": "^10.4.13",
     "eslint": "8.25.0",

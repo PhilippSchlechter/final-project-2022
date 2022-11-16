@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { getValidSessionByToken } from '../database/sessions';
@@ -49,7 +50,7 @@ export default function Login(props: Props) {
     // refresh the user on state
     await props.refreshUserProfile();
     // redirect user to user profile
-    await router.push(`/bookshelf`);
+    await router.push(`/private-profile`);
   }
 
   return (
@@ -63,9 +64,11 @@ export default function Login(props: Props) {
         return (
           <p
             css={css`
-              background-color: red;
+              background-color: #df3939;
+              border-radius: 3px;
               color: white;
               padding: 5px;
+              margin: 10px 0 10px 0;
             `}
             key={error.message}
           >
@@ -75,9 +78,11 @@ export default function Login(props: Props) {
       })}
 
       <label>
-        username:
+        {/* username: */}
         <div>
           <input
+            className="border-slate-400 rounded placeholder:font-sans comfortaa placeholder:text-slate-400 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
+            placeholder="Username"
             value={username}
             onChange={(event) => {
               setUsername(event.currentTarget.value.toLowerCase());
@@ -87,9 +92,11 @@ export default function Login(props: Props) {
       </label>
       <br />
       <label>
-        password:
+        {/*  password: */}
         <div>
           <input
+            className=" border-slate-400 rounded placeholder:italic placeholder:text-slate-400 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
+            placeholder="Password"
             type="password"
             value={password}
             onChange={(event) => {
@@ -106,6 +113,15 @@ export default function Login(props: Props) {
       >
         Login
       </button>
+      <p>
+        no account yet?
+        <Link
+          className="pl-1 text-violet-500 hover:text-violet-600 active:text-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
+          href="/register"
+        >
+          sign up here
+        </Link>
+      </p>
     </>
   );
 }

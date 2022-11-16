@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Book, getBooksByUserId } from '../database/books';
 import { getValidSessionByToken } from '../database/sessions';
 import { getUserBySessionToken, User } from '../database/users';
@@ -16,27 +16,15 @@ type Props = {
   errors: { message: string }[];
 };
 
-// problem with ts undefined
-/* type Props = {
-  user?: User;
-}; */
-
 const inputDisplayStyles = css`
   background-color: white;
+
   margin-left: 5px;
   margin-top: 3px;
   border-radius: 4px;
 
   border: 1px solid #ccc;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
-  color: black;
-`;
-const buttonStyles = css`
-  background-color: white;
-  margin: 3px;
-  border-radius: 4px;
 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
   color: black;
 `;
 
@@ -45,6 +33,7 @@ const bookListStyles = css`
   border-radius: 7px;
   width: 850px;
   height: 700px;
+  background-color: #fbf5f888;
   margin: 0 auto;
   padding: 20px 0 0 200px;
 `;
@@ -54,6 +43,16 @@ const bookListStyles = css`
 
 const h1Styles = css`
   padding: 20px 0 30px 20px;
+`;
+const topContainerStyles = css`
+  display: flex;
+  justify-content: space-around;
+`;
+const imageStyles = css`
+  margin-top: 50px;
+`;
+const inputContainerStyles = css`
+  margin-left: 130px;
 `;
 
 const deleteStyles = css`
@@ -188,16 +187,28 @@ export default function UserProfile(props: Props) {
         <title>Bookshelf</title>
         <meta name="description" content="Private bookshelf of the user" />
       </Head>
-      <h1 css={h1Styles}>{props.user.username}'s Bookshelf</h1>
+      <div css={topContainerStyles}>
+        <h1 css={h1Styles}>{props.user.username}'s bookshelf</h1>
 
-      {/* Admin input down below */}
+        {/* Admin input down below */}
+        <Image
+          src="/1-bookshelf.png"
+          alt=""
+          width="200"
+          height="200"
+          css={imageStyles}
+        />
+      </div>
 
-      <div>
+      <div css={inputContainerStyles}>
+        <p className="text-xl">Add your books:</p>
         <label>
-          Author
           <br />
           <input
-            css={inputDisplayStyles}
+            className="border-slate-400 rounded
+            font-sans
+            placeholder:text-slate-500 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
+            placeholder="Author"
             value={authorInput}
             onChange={(event) => {
               setAuthorInput(event.currentTarget.value);
@@ -207,10 +218,11 @@ export default function UserProfile(props: Props) {
         <br />
 
         <label>
-          Title
           <br />
           <input
-            css={inputDisplayStyles}
+            className="border-slate-400 rounded placeholder:font-sans
+            placeholder:text-slate-500 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
+            placeholder="Title"
             value={titleInput}
             onChange={(event) => {
               setTitleInput(event.currentTarget.value);
@@ -218,18 +230,18 @@ export default function UserProfile(props: Props) {
           />
         </label>
         <button
-          css={buttonStyles}
+          className="btn"
           onClick={async () => {
             await createBookFromApi();
           }}
         >
-          add book
+          add
         </button>
       </div>
       <br />
       <br />
       <br />
-      <div css={bookListStyles}>
+      <div className="shadow-lg" css={bookListStyles}>
         {books.map((book) => {
           const isBookOnEdit = onEditId === book.id;
 
@@ -237,6 +249,9 @@ export default function UserProfile(props: Props) {
             <Fragment key={book.id}>
               <input
                 css={inputDisplayStyles}
+                className="border-slate-400 rounded
+            font-sans
+             bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
                 value={isBookOnEdit ? authorOnEditInput : book.author}
                 disabled={!isBookOnEdit}
                 onChange={(event) => {
@@ -244,6 +259,9 @@ export default function UserProfile(props: Props) {
                 }}
               />
               <input
+                className="border-slate-400 rounded
+                font-sans
+                 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
                 css={inputDisplayStyles}
                 value={isBookOnEdit ? titleOnEditInput : book.title}
                 disabled={!isBookOnEdit}
@@ -253,14 +271,14 @@ export default function UserProfile(props: Props) {
               />
 
               <button
-                css={buttonStyles}
+                className="btn"
                 onClick={() => deleteBookFromApiById(book.id)}
               >
                 delete
               </button>
               {!isBookOnEdit ? (
                 <button
-                  css={buttonStyles}
+                  className="btn"
                   onClick={() => {
                     setOnEditId(book.id);
                     setAuthorOnEditInput(book.author);
@@ -271,7 +289,7 @@ export default function UserProfile(props: Props) {
                 </button>
               ) : (
                 <button
-                  css={buttonStyles}
+                  className="btn"
                   onClick={async () => {
                     setOnEditId(undefined);
                     await updateBookFromApiById(book.id);
@@ -287,11 +305,10 @@ export default function UserProfile(props: Props) {
         })}
       </div>
 
-      <Image src="/1-bookshelf.png" alt="" width="200" height="200" />
       <div css={deleteStyles}>
         Delete Account:
         <button
-          css={buttonStyles}
+          className="btn"
           onClick={() => deleteUserFromApiById(props.user!.id)}
         >
           delete

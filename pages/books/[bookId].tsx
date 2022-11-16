@@ -3,13 +3,14 @@ import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
 import { Book, getBookById } from '../../database/books';
-import { getUserBySessionToken, User } from '../../database/users';
+import { getUserBySessionToken } from '../../database/users';
 import { parseIntFromContextQuery } from '../../utils/contextQuery';
 
 const bookStyles = css`
   height: 1000px;
   width: 650px;
   border-radius: 15px;
+  background-color: #fbf5f888;
   border: 2px solid #ccc;
   padding: 20px;
   h1 {
@@ -20,17 +21,25 @@ const bookStyles = css`
     margin-top: 25px;
   }
 `;
+const textAreaStyles = css`
+  height: 300px;
+  width: 450px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
 
 type Props = {
   book: Book;
   error: string;
-  /* user?: User; */
 };
 
 export default function SingleBook(props: Props) {
-  const [comment, setComment] = useState(props.book.comment);
+  const [comment, setComment] = useState<Book['comment']>(props.book.comment);
   const [commentOnEditInput, setCommentOnEditInput] = useState('');
   const [onEditId, setOnEditId] = useState<number | undefined>();
+
+  console.log(comment);
 
   if ('error' in props) {
     return (
@@ -45,23 +54,20 @@ export default function SingleBook(props: Props) {
   }
 
   async function createBookCommentFromApi(id: number) {
-    const response = await fetch(`/api/books/${id}template`, {
-      method: 'POST',
+    const response = await fetch(`/api/book/${id}`, {
+      method: 'PUT',
       headers: {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
         comment: commentOnEditInput,
-        /* id: props.user?.id, */
       }),
     });
-    const bookCommentFromApi = (await response.json()) as Book;
+    const bookCommentFromApi = (await response.json()) as Book['comment'];
 
-    /* setComment(bookCommentFromApi); */
+    setComment(bookCommentFromApi);
   }
   const isCommentOnEdit = onEditId === props.book.id;
-
-  console.log('comment', props.book.comment);
 
   return (
     <div>
@@ -69,40 +75,45 @@ export default function SingleBook(props: Props) {
         <title>Book templates</title>
         <meta name="description" content="Book template" />
       </Head>
-      <div css={bookStyles}>
+      <div css={bookStyles} className="shadow-md">
         <h1>{props.book.title}</h1>
         <h2>{props.book.author}</h2>
         <br />
         <br />
         <br />
-        <h3>Description</h3>
-        <div>{props.book.comment}</div>
-        <input
-          value={isCommentOnEdit ? commentOnEditInput : props.book.comment}
-          disabled={!isCommentOnEdit}
-          onChange={(event) => {
-            setCommentOnEditInput(event.currentTarget.value);
-          }}
-        />
-        {!isCommentOnEdit ? (
-          <button
-            onClick={() => {
-              setOnEditId(props.book.id);
-              setCommentOnEditInput(props.book.comment);
+        <h3>Key Takeaways</h3>
+
+        <div>
+          <textarea
+            css={textAreaStyles}
+            className="font-sans "
+            value={isCommentOnEdit ? commentOnEditInput : props.book.comment}
+            disabled={!isCommentOnEdit}
+            onChange={(event) => {
+              setCommentOnEditInput(event.currentTarget.value);
             }}
-          >
-            edit
-          </button>
-        ) : (
-          <button
-            onClick={async () => {
-              setOnEditId(undefined);
-              await createBookCommentFromApi(props.book.id);
-            }}
-          >
-            save
-          </button>
-        )}
+          />
+          <br />
+          {!isCommentOnEdit ? (
+            <button
+              onClick={() => {
+                setOnEditId(props.book.id);
+                setCommentOnEditInput(props.book.comment!);
+              }}
+            >
+              edit
+            </button>
+          ) : (
+            <button
+              onClick={async () => {
+                setOnEditId(undefined);
+                await createBookCommentFromApi(props.book.id);
+              }}
+            >
+              save
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

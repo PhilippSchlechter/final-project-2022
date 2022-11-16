@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   createCommentByBookId,
-  deleteBookById,
   getBookByIdAndValidSessionToken,
 } from '../../../database/books';
 import { getValidSessionByToken } from '../../../database/sessions';
@@ -22,10 +21,11 @@ export default async function handler(
   }
 
   const bookId = Number(request.query.bookId);
+  console.log('bookId', bookId);
 
   // check if the id is a number
   if (!bookId) {
-    return response.status(404).json({ message: 'Not a valid Id' });
+    return response.status(404).json({ message: 'Not a valid BookId' });
   }
 
   if (request.method === 'GET') {
@@ -63,9 +63,9 @@ export default async function handler(
     // Create the book using the database util function
     const newBookComment = await createCommentByBookId(bookId, comment);
 
-    if (!newBookComment) {
+    /* if (!newBookComment) {
       return response.status(404).json({ message: 'Not a valid Id' });
-    }
+    } */
 
     // response with the new created book
     return response.status(200).json(newBookComment);

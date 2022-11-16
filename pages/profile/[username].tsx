@@ -1,6 +1,7 @@
+import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Book, getBooksByUserId } from '../../database/books';
 import { getUserByUsername, User } from '../../database/users';
 
@@ -8,6 +9,17 @@ type Props = {
   user?: User;
   books: Book[];
 };
+
+const bookStyles = css`
+  .hide {
+    display: none;
+  }
+
+  .myDIV:hover + .hide {
+    display: block;
+    color: red;
+  }
+`;
 
 export default function UserProfile(props: Props) {
   if (!props.user) {
@@ -23,24 +35,36 @@ export default function UserProfile(props: Props) {
   }
 
   const books = props.books;
-  const userBooks = books.map((book) => {
+  /* const userBooks = books.map((book) => {
     return (
       <div key="props.books">
         ▪️ {book.author} - {book.title}{' '}
       </div>
     );
   });
-
+ */
   return (
     <>
       <Head>
         <title>Public Profile</title>
         <meta name="description" content="Biography of the person" />
       </Head>
-      <h1>{props.user.username}'s Bookshelf:</h1>
+      <h1>{props.user.username}'s bookshelf:</h1>
+
+      {/* {userBooks} */}
       <hr />
-      {userBooks}
-      <hr />
+      <div css={bookStyles}>
+        {books.map((book) => {
+          return (
+            <div key="props.books">
+              ▪️ {book.author} - {book.title}{' '}
+              <Link href={`/profile/user/${props.user!.username}/${book.id}`}>
+                ➜
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }
@@ -55,7 +79,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return { props: {} };
   }
   const books = await getBooksByUserId(user.id);
-  console.log('books profile test', books);
+
   return {
     props: { user, books },
   };

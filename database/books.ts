@@ -5,7 +5,7 @@ export type Book = {
   author: string;
   title: string;
   userId: number;
-  comment: string;
+  comment: string | undefined;
 };
 
 export type User = {
@@ -92,7 +92,7 @@ export async function createBook(author: string, title: string) {
 }
 // create book comment, description for a specific book of yours
 
-export async function createCommentByBookId(id: number, comment: string ) {
+export async function createCommentByBookId(id: number, comment: string) {
   const [userBookComment] = await sql<Book[]>`
     UPDATE
       books

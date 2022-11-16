@@ -49,6 +49,9 @@ export default async function handler(
     // NOT getting the id from the body since is already on the query
     const author = request.body?.author;
     const title = request.body?.title;
+    const comment = request.body?.comment;
+
+    console.log('comment', comment);
 
     // Check all the information to create the book
     if (!(author && title)) {
@@ -56,8 +59,6 @@ export default async function handler(
         .status(400)
         .json({ message: 'property author or title missing' });
     }
-
-    // TODO: add title checking to the api
 
     // Create the book using the database util function
     const newBook = await updateBookById(bookId, author, title);

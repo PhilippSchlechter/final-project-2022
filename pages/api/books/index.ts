@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getBooks, getBooksByUserId } from '../../../database/books';
+import { getBooks } from '../../../database/books';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { createBookByUserId } from '../../../database/user_books';
 
