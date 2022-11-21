@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import SearchForm from '../components/SearchForm';
@@ -26,6 +25,7 @@ export default function SearchPage() {
       setErrors(foundUsers.errors);
       return console.log('errors', foundUsers.errors);
     }
+
     await router.push(`/profile/${foundUsers.user.username}`);
   };
 
@@ -35,21 +35,14 @@ export default function SearchPage() {
         searchFormState={searchFormState}
         setSearchFormState={setSearchFormState}
       />
+      <button onClick={() => searchUsersByApi(searchFormState)}>search</button>
       {errors.map((error) => {
         return (
-          <p
-            css={css`
-              border: 2px solid;
-              border-color: #eb5b5b;
-              padding: 0.5rem;
-            `}
-            key={error.message}
-          >
+          <p id="hideMeAfter5Seconds" key={error.message}>
             {error.message}
           </p>
         );
       })}
-      <button onClick={() => searchUsersByApi(searchFormState)}>search</button>
     </div>
   );
 }

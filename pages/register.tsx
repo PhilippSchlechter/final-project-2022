@@ -70,9 +70,9 @@ export default function Register(props: Props) {
           return (
             <p
               css={css`
-                background-color: red;
-                color: white;
-                padding: 5px;
+                border: 2px solid;
+  border-color: #eb5b5b;
+  padding: 0.5rem;
               `}
               key={error.message}
             >

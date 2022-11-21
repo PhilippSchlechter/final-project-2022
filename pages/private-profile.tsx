@@ -71,18 +71,6 @@ export default function UserProfile(props: Props) {
   const [titleOnEditInput, setTitleOnEditInput] = useState('');
   const [onEditId, setOnEditId] = useState<number | undefined>();
 
-  /* async function getBooksFromApi() {
-    const response = await fetch('/api/books');
-    const booksFromApi = await response.json();
-
-    setBooks(booksFromApi);
-  }
-  useEffect(() => {
-    getBooksFromApi().catch((err) => {
-      console.log(err);
-    });
-  }, []); */
-
   if (!props.user) {
     return (
       <>

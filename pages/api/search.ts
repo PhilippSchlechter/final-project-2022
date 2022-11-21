@@ -30,5 +30,7 @@ export default async function handler(
     }
 
     response.status(200).json({ user: user });
+  } else {
+    response.status(401).json({ errors: [{ message: 'Method not allowed' }] });
   }
 }

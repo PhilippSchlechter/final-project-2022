@@ -1,15 +1,10 @@
-const SearchForm = ({
-  searchFormState,
-  setSearchFormState,
-  /* setDisplayedUsers, */
-}) => {
+const SearchForm = ({ searchFormState, setSearchFormState }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (searchFormState) {
       console.log(`Searching: ${searchFormState}`);
     }
-    /* console.log(setDisplayedUsers); */
   };
 
   return (

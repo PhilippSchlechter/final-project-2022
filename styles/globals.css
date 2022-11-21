@@ -19,6 +19,22 @@
   }
 }
 
+#hideMeAfter5Seconds {
+  animation: hideAnimation 0s ease-in 4s;
+  animation-fill-mode: forwards;
+  border: 2px solid;
+  border-color: #eb5b5b;
+  padding: 0.5rem;
+}
+
+@keyframes hideAnimation {
+  to {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+}
+
 /* html,
 body {
   padding: 0;

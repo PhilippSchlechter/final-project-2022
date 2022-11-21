@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Book, getBooksByUserId } from '../../database/books';
 import { getUserByUsername, User } from '../../database/users';
-import SearchPage from '../search';
 
 type Props = {
   user?: User;
@@ -31,7 +30,7 @@ export default function UserProfile(props: Props) {
           <meta name="description" content="User not found" />
         </Head>
         <h1>User not found</h1>
-        <SearchPage />
+        <Link href="/search">Search for users ➜</Link>
       </>
     );
   }
