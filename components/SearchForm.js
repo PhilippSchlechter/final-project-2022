@@ -1,14 +1,15 @@
 const SearchForm = ({
   searchFormState,
   setSearchFormState,
-  /* setDisplayedJobs, */
+  setDisplayedUsers,
 }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     if (searchFormState) {
       console.log(`Searching: ${searchFormState}`);
     }
+    console.log(setDisplayedUsers);
   };
 
   return (
@@ -23,7 +24,9 @@ const SearchForm = ({
           type="search"
           placeholder="Search users…"
           value={searchFormState}
-          onChange={(e) => setSearchFormState(e.target.value)}
+          onChange={(event) => {
+            setSearchFormState(event.target.value);
+          }}
         />
         <button
           className="absolute inset-0 right-auto group"

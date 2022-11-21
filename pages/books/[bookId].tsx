@@ -36,8 +36,10 @@ type Props = {
 
 export default function SingleBook(props: Props) {
   const [comment, setComment] = useState<Book['comment']>(props.book.comment);
-  const [commentOnEditInput, setCommentOnEditInput] = useState('');
-  const [onEditId, setOnEditId] = useState<number | undefined>();
+  const [commentOnEditInput, setCommentOnEditInput] = useState<Book['comment']>(
+    props.book.comment,
+  );
+  /*  const [onEditId, setOnEditId] = useState<number | undefined>(); */
 
   console.log(comment);
 
@@ -64,15 +66,17 @@ export default function SingleBook(props: Props) {
       }),
     });
     const bookCommentFromApi = (await response.json()) as Book['comment'];
+    console.log('bookCommentFromApi', bookCommentFromApi);
 
     setComment(bookCommentFromApi);
   }
-  const isCommentOnEdit = onEditId === props.book.id;
+
+  const isCommentOnEdit = /* onEditId === */ props.book.id;
 
   return (
     <div>
       <Head>
-        <title>Book templates</title>
+        <title>My Book Templates</title>
         <meta name="description" content="Book template" />
       </Head>
       <div css={bookStyles} className="shadow-md">
@@ -94,11 +98,11 @@ export default function SingleBook(props: Props) {
             }}
           />
           <br />
-          {!isCommentOnEdit ? (
+          {!commentOnEditInput ? (
             <button
               onClick={() => {
-                setOnEditId(props.book.id);
-                setCommentOnEditInput(props.book.comment!);
+                /* setOnEditId(props.book.id); */
+                setCommentOnEditInput(props.book.comment);
               }}
             >
               edit
@@ -106,7 +110,8 @@ export default function SingleBook(props: Props) {
           ) : (
             <button
               onClick={async () => {
-                setOnEditId(undefined);
+                /* setOnEditId(undefined); */
+
                 await createBookCommentFromApi(props.book.id);
               }}
             >

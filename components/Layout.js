@@ -10,7 +10,7 @@ export default function Layout(props) {
   return (
     <>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/faviconB.ico" />
       </Head>
       {/* header component for all pages */}
       <Header user={props.user} />

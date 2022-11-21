@@ -28,6 +28,22 @@ export async function getUserByUsername(username: string) {
 
   return user;
 }
+
+export async function getUserByUsernameSearchBar(username: string) {
+  if (!username) return undefined;
+
+  const [user] = await sql<{ username: string }[]>`
+  SELECT
+    username
+  FROM
+    users
+  WHERE
+    users.username = ${username}
+  `;
+
+  return user;
+}
+
 // for the login
 export async function getUserWithPasswordHashByUsername(username: string) {
   if (!username) return undefined;

@@ -44,7 +44,8 @@ export default function Header(props) {
           /> */}
           <Link href="/"> Home</Link>
           <Link href={`/profile/${props.user?.username}`}>Profile</Link>
-          <Link href="/private-profile">🕮 Bookshelf</Link>
+          <Link href="/search">Search</Link>
+          <Link href="/private-profile">My Bookshelf</Link>
         </div>
         {props.user && props.user.username}
         {props.user ? (

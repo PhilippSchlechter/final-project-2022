@@ -35,29 +35,28 @@ export default function UserProfile(props: Props) {
   }
 
   const books = props.books;
-  /* const userBooks = books.map((book) => {
-    return (
-      <div key="props.books">
-        ▪️ {book.author} - {book.title}{' '}
-      </div>
-    );
-  });
- */
+  const nameToUpperCase = props.user.username;
+  const nameToUpperCase2 =
+    nameToUpperCase.charAt(0).toUpperCase() + nameToUpperCase.slice(1);
+
   return (
     <>
       <Head>
-        <title>Public Profile</title>
+        <title>{nameToUpperCase2}'s Bookshelf</title>
         <meta name="description" content="Biography of the person" />
       </Head>
-      <h1>{props.user.username}'s bookshelf:</h1>
-
-      {/* {userBooks} */}
+      <h1>
+        {props.user.username}'s bookshelf:
+      </h1>
       <hr />
       <div css={bookStyles}>
         {books.map((book) => {
           return (
-            <div key="props.books">
-              ▪️ {book.author} - {book.title}{' '}
+            <div
+              className="my-5 mx-1 first-letter:uppercase"
+              key={`${book}${book.userId}`}
+            >
+              ▪️ {book.author} - {book.title}
               <Link href={`/profile/user/${props.user!.username}/${book.id}`}>
                 ➜
               </Link>

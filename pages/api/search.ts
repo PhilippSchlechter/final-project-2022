@@ -1,14 +1,45 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getUserByUsernameSearchBar } from '../../database/users';
 
-type Data = {
-  results: string[];
-};
-
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>,
+export default async function handler(
+  request: NextApiRequest,
+  response: NextApiResponse,
 ) {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify({ results: ['post1', 'post2'] }));
+  const searchFormState = request.body || undefined;
+
+  const query = searchFormState;
+  console.log(query);
+
+  if (request.method === 'POST') {
+    const users = await getUserByUsernameSearchBar(query);
+
+    response.status(200).json(users);
+  }
 }
+
+// 2nd version
+
+/* export type SearchResponseBody =
+  | { errors: { message: string }[] }
+  | { user: { username: string } };
+
+export default async function handler(
+  request: NextApiRequest,
+  response: NextApiResponse<SearchResponseBody>,
+) {
+  const searchFormState = request.body.username;
+
+  const query = searchFormState;
+  console.log(query);
+
+  if (request.method === 'POST') {
+    const users = await getUserByUsernameSearchBar(query);
+    if (!users) {
+      return response
+        .status(401)
+        .json({ errors: [{ message: 'user not found' }] });
+    }
+    response.status(200).json({ user: { username: users.username } });
+  }
+}
+ */

@@ -49,9 +49,9 @@ export default async function handler(
     // NOT getting the id from the body since is already on the query
     const author = request.body?.author;
     const title = request.body?.title;
-    const comment = request.body?.comment;
+    /* const comment = request.body?.comment;
 
-    console.log('comment', comment);
+    console.log('comment', comment); */
 
     // Check all the information to create the book
     if (!(author && title)) {

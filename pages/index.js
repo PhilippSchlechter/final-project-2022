@@ -1,6 +1,5 @@
-import { css } from '@emotion/react';
+import Head from 'next/head';
 import Image from 'next/image';
-import SearchForm from '../components/SearchBar';
 
 /* const imageStyles = css`
   display: flex;
@@ -14,6 +13,10 @@ import SearchForm from '../components/SearchBar';
 export default function Home() {
   return (
     <div>
+      <Head>
+        <title>Home</title>
+        <meta name="Homepage" content="Landing page bookshelf app" />
+      </Head>
       <h1 className="m-5">bookshelf</h1>
       <Image
         src="/1-bookshelf.png"
@@ -25,7 +28,6 @@ export default function Home() {
       <br />
       <br />
       <br />
-      <SearchForm />
     </div>
   );
 }

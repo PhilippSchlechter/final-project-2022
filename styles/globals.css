@@ -12,7 +12,7 @@
 }
 @layer components {
   .btn {
-    @apply font-sans bg-white text-black font-bold py-1 px-3 ml-2 my-1 rounded;
+    @apply font-sans bg-white font-bold py-1 px-3 ml-2 my-1 rounded border-slate-400;
   }
   .btn:hover {
     @apply bg-slate-50;

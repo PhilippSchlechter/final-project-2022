@@ -33,7 +33,7 @@ const bookListStyles = css`
   border-radius: 7px;
   width: 850px;
   height: 700px;
-  background-color: #fbf5f888;
+  background-color: #fbf5f888; /* #eee7ec */
   margin: 0 auto;
   padding: 20px 0 0 200px;
 `;
@@ -52,7 +52,8 @@ const imageStyles = css`
   margin-top: 50px;
 `;
 const inputContainerStyles = css`
-  margin-left: 130px;
+  margin-left: 220px;
+  margin-bottom: 20px;
 `;
 
 const deleteStyles = css`
@@ -184,7 +185,7 @@ export default function UserProfile(props: Props) {
   return (
     <>
       <Head>
-        <title>Bookshelf</title>
+        <title>My Bookshelf</title>
         <meta name="description" content="Private bookshelf of the user" />
       </Head>
       <div css={topContainerStyles}>
@@ -238,68 +239,87 @@ export default function UserProfile(props: Props) {
           add
         </button>
       </div>
+
       <br />
       <br />
       <br />
-      <div className="shadow-lg" css={bookListStyles}>
+      <div
+        className="border-slate-400 shadow-lg display: block"
+        css={bookListStyles}
+      >
+        {/* <p className="text-xl">Author - Title</p> */}
         {books.map((book) => {
           const isBookOnEdit = onEditId === book.id;
 
           return (
             <Fragment key={book.id}>
-              <input
-                css={inputDisplayStyles}
-                className="border-slate-400 rounded
+              <div className="py-2">
+                <input
+                  css={inputDisplayStyles}
+                  className="border-slate-400 rounded
             font-sans
              bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
-                value={isBookOnEdit ? authorOnEditInput : book.author}
-                disabled={!isBookOnEdit}
-                onChange={(event) => {
-                  setAuthorOnEditInput(event.currentTarget.value);
-                }}
-              />
-              <input
-                className="border-slate-400 rounded
+                  value={isBookOnEdit ? authorOnEditInput : book.author}
+                  disabled={!isBookOnEdit}
+                  onChange={(event) => {
+                    setAuthorOnEditInput(event.currentTarget.value);
+                  }}
+                />
+                <input
+                  className="border-slate-400 rounded
                 font-sans
                  bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
-                css={inputDisplayStyles}
-                value={isBookOnEdit ? titleOnEditInput : book.title}
-                disabled={!isBookOnEdit}
-                onChange={(event) => {
-                  setTitleOnEditInput(event.currentTarget.value);
-                }}
-              />
+                  css={inputDisplayStyles}
+                  value={isBookOnEdit ? titleOnEditInput : book.title}
+                  disabled={!isBookOnEdit}
+                  onChange={(event) => {
+                    setTitleOnEditInput(event.currentTarget.value);
+                  }}
+                />
 
-              <button
-                className="btn"
-                onClick={() => deleteBookFromApiById(book.id)}
-              >
-                delete
-              </button>
-              {!isBookOnEdit ? (
+                <input
+                  type="checkbox"
+                  name="options"
+                  id="options"
+                  className="peer"
+                />
+
                 <button
-                  className="btn"
-                  onClick={() => {
-                    setOnEditId(book.id);
-                    setAuthorOnEditInput(book.author);
-                    setTitleOnEditInput(book.title);
-                  }}
+                  className="btn invisible peer-checked:visible"
+                  onClick={() => deleteBookFromApiById(book.id)}
                 >
-                  edit
+                  delete
                 </button>
-              ) : (
-                <button
-                  className="btn"
-                  onClick={async () => {
-                    setOnEditId(undefined);
-                    await updateBookFromApiById(book.id);
-                  }}
+                {!isBookOnEdit ? (
+                  <button
+                    className="btn invisible peer-checked:visible"
+                    onClick={() => {
+                      setOnEditId(book.id);
+                      setAuthorOnEditInput(book.author);
+                      setTitleOnEditInput(book.title);
+                    }}
+                  >
+                    edit
+                  </button>
+                ) : (
+                  <button
+                    className="btn"
+                    onClick={async () => {
+                      setOnEditId(undefined);
+                      await updateBookFromApiById(book.id);
+                    }}
+                  >
+                    save
+                  </button>
+                )}
+                <Link
+                  className="invisible peer-checked:visible"
+                  href={`/books/${book.id}`}
                 >
-                  save
-                </button>
-              )}
-              <Link href={`/books/${book.id}`}>➜</Link>
-              <br />
+                  ➜
+                </Link>
+                <br />
+              </div>
             </Fragment>
           );
         })}

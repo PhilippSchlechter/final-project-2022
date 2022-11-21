@@ -38,11 +38,14 @@ export default function UserProfile(props: Props) {
       </>
     );
   }
+  const nameToUpperCase = props.user.username;
+  const nameToUpperCase2 =
+    nameToUpperCase.charAt(0).toUpperCase() + nameToUpperCase.slice(1);
 
   return (
     <>
       <Head>
-        <title>Public Profile</title>
+        <title>{nameToUpperCase2}'s Bookshelf</title>
         <meta name="description" content="Biography of the person" />
       </Head>
       <div css={bookStyles} className="shadow-md">
