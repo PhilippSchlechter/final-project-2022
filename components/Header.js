@@ -35,16 +35,9 @@ export default function Header(props) {
     <header>
       <nav css={navStyles}>
         <div>
-          {/* <Image
-            css={iconStyles}
-            src="/1-book-open-variant.png"
-            alt="open book icon"
-            width="15"
-            height="15"
-          /> */}
           <Link href="/"> Home</Link>
-          <Link href={`/profile/${props.user?.username}`}>Profile</Link>
-          <Link href="/search">Search</Link>
+          {/* <Link href={`/profile/${props.user?.username}`}>Profile</Link> */}
+          <Link href="/search">Search Profiles</Link>
           <Link href="/private-profile">My Bookshelf</Link>
         </div>
         {props.user && props.user.username}

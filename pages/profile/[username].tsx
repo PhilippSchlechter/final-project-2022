@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Book, getBooksByUserId } from '../../database/books';
 import { getUserByUsername, User } from '../../database/users';
+import SearchPage from '../search';
 
 type Props = {
   user?: User;
@@ -29,7 +30,8 @@ export default function UserProfile(props: Props) {
           <title>User not found</title>
           <meta name="description" content="User not found" />
         </Head>
-        <h1>404 - User not found</h1>
+        <h1>User not found</h1>
+        <SearchPage />
       </>
     );
   }
@@ -45,9 +47,7 @@ export default function UserProfile(props: Props) {
         <title>{nameToUpperCase2}'s Bookshelf</title>
         <meta name="description" content="Biography of the person" />
       </Head>
-      <h1>
-        {props.user.username}'s bookshelf:
-      </h1>
+      <h1>{props.user.username}'s bookshelf:</h1>
       <hr />
       <div css={bookStyles}>
         {books.map((book) => {

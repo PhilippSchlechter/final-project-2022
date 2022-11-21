@@ -1,7 +1,7 @@
 const SearchForm = ({
   searchFormState,
   setSearchFormState,
-  setDisplayedUsers,
+  /* setDisplayedUsers, */
 }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -9,7 +9,7 @@ const SearchForm = ({
     if (searchFormState) {
       console.log(`Searching: ${searchFormState}`);
     }
-    console.log(setDisplayedUsers);
+    /* console.log(setDisplayedUsers); */
   };
 
   return (
@@ -28,10 +28,10 @@ const SearchForm = ({
             setSearchFormState(event.target.value);
           }}
         />
-        <button
+        {/* <button
           className="absolute inset-0 right-auto group"
           aria-label="Search"
-        />
+        /> */}
       </form>
     </div>
   );
