@@ -10,7 +10,7 @@ import { getValidSessionByToken } from '../database/sessions';
 import { getUserBySessionToken, User } from '../database/users';
 
 type Props = {
-  user?: User;
+  user: User;
   books: Book[];
   refreshUserProfile: () => Promise<void>;
   errors: { message: string }[];
@@ -71,7 +71,7 @@ export default function UserProfile(props: Props) {
   const [titleOnEditInput, setTitleOnEditInput] = useState('');
   const [onEditId, setOnEditId] = useState<number | undefined>();
 
-  if (!props.user) {
+  /* if (!props.user) {
     return (
       <>
         <Head>
@@ -81,7 +81,7 @@ export default function UserProfile(props: Props) {
         <h1>404 - User not found</h1>
       </>
     );
-  }
+  } */
 
   async function deleteUserFromApiById(id: number) {
     await fetch(`/api/profiles/${id}`, {
@@ -106,7 +106,7 @@ export default function UserProfile(props: Props) {
       body: JSON.stringify({
         author: authorInput,
         title: titleInput,
-        id: props.user?.id,
+        id: props.user.id,
       }),
     });
     const bookFromApi = (await response.json()) as Book;
@@ -317,7 +317,7 @@ export default function UserProfile(props: Props) {
         Delete Account:
         <button
           className="btn"
-          onClick={() => deleteUserFromApiById(props.user!.id)}
+          onClick={() => deleteUserFromApiById(props.user.id)}
         >
           delete profile
         </button>
