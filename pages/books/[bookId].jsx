@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { GetServerSidePropsContext } from 'next';
+/* import { GetServerSidePropsContext } from 'next'; */
 import Head from 'next/head';
 import { useState } from 'react';
-import { Book, getBookById } from '../../database/books';
+import { getBookById } from '../../database/books';
 import { getUserBySessionToken } from '../../database/users';
 import { parseIntFromContextQuery } from '../../utils/contextQuery';
 
@@ -29,15 +29,17 @@ const textAreaStyles = css`
   border-radius: 5px;
 `;
 
-type Props = {
+/* type Props = {
   book: Book;
   error: string;
 };
-
-export default function SingleBook(props: Props) {
-  const [comment, setComment] = useState<Book['comment']>(props.book.comment);
-  const [commentOnEditInput, setCommentOnEditInput] = useState<Book['comment']>(
-    props.book.comment,
+ */
+export default function SingleBook(props /* : Props */) {
+  const [comment, setComment] = useState(
+    /* <Book['comment']> */ props.book.comment,
+  );
+  const [commentOnEditInput, setCommentOnEditInput] = useState(
+    /* <Book['comment']> */ props.book.comment,
   );
 
   console.log(comment);
@@ -54,7 +56,7 @@ export default function SingleBook(props: Props) {
     );
   }
 
-  async function createBookCommentFromApi(id: number) {
+  async function createBookCommentFromApi(id /* : number */) {
     const response = await fetch(`/api/book/${id}`, {
       method: 'PUT',
       headers: {
@@ -64,7 +66,7 @@ export default function SingleBook(props: Props) {
         comment: commentOnEditInput,
       }),
     });
-    const bookCommentFromApi = (await response.json()) as Book['comment'];
+    const bookCommentFromApi = await response.json(); /* as Book['comment']; */
 
     setComment(bookCommentFromApi);
   }
@@ -119,7 +121,9 @@ export default function SingleBook(props: Props) {
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(
+  context /* : GetServerSidePropsContext */,
+) {
   // Retrieve the book ID from the URL
   const bookId = parseIntFromContextQuery(context.query.bookId);
   const token = context.req.cookies.sessionToken;
