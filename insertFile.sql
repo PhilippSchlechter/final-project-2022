@@ -6,8 +6,8 @@ CREATE TABLE users(
   created_at timestamp
 );
 
-INSERT INTO users
-(username, password_hash)
+INSERT INTO books
+(author, title)
 VALUES
   ('Phil','123456'),
 SELECT * FROM users;

@@ -31,4 +31,5 @@ test('database test: create, read, delete a book', async () => {
   expect(await deleteBookById(testBook.id)).not.toBe(undefined);
   expect(await getBookById(id)).toBe(undefined);
   await sql.end();
-}); */
+});
+ */

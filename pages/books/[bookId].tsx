@@ -39,7 +39,6 @@ export default function SingleBook(props: Props) {
   const [commentOnEditInput, setCommentOnEditInput] = useState<Book['comment']>(
     props.book.comment,
   );
-  /*  const [onEditId, setOnEditId] = useState<number | undefined>(); */
 
   console.log(comment);
 
@@ -101,7 +100,6 @@ export default function SingleBook(props: Props) {
           {!commentOnEditInput ? (
             <button
               onClick={() => {
-                /* setOnEditId(props.book.id); */
                 setCommentOnEditInput(props.book.comment);
               }}
             >
@@ -110,8 +108,6 @@ export default function SingleBook(props: Props) {
           ) : (
             <button
               onClick={async () => {
-                /* setOnEditId(undefined); */
-
                 await createBookCommentFromApi(props.book.id);
               }}
             >
@@ -166,7 +162,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       },
     };
   }
-  /*  console.log('userId', user.id); */
 
   return {
     props: {
