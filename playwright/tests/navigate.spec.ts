@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-/* end-to-end tests:
+/* e2e-tests:
     - check various elements (links, h1's, inputs etc.)
     - register as a new test-user, create a book, delete a book, search for a user, view user profile, public and private, delete test-user at the end and return back to home
  */
@@ -23,7 +23,7 @@ test('navigation test', async ({ page }) => {
   await expect(page).toHaveURL('http://localhost:3000/login');
 });
 
-test('navigation test 2', async ({ page }) => {
+test('navigation and functionality test', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   await page.locator('a:has-text("Register")').click();
   await expect(page).toHaveURL('http://localhost:3000/register');
