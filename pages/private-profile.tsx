@@ -177,7 +177,7 @@ export default function UserProfile(props: Props) {
         <meta name="description" content="Private bookshelf of the user" />
       </Head>
       <div css={topContainerStyles}>
-        <h1 css={h1Styles}>{props.user.username}'s bookshelf</h1>
+        <h1 css={h1Styles}>{props.user['username']}'s bookshelf</h1>
 
         {/* Admin input down below */}
         <Image
@@ -317,7 +317,7 @@ export default function UserProfile(props: Props) {
         Delete Account:
         <button
           className="btn"
-          onClick={() => deleteUserFromApiById(props.user.id)}
+          onClick={() => deleteUserFromApiById(props.user['id'])}
         >
           delete profile
         </button>
