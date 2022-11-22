@@ -78,7 +78,7 @@ export default function Login(props: Props) {
       })}
 
       <label>
-        {/* username: */}
+        username:
         <div>
           <input
             className="border-slate-400 rounded placeholder:font-sans comfortaa placeholder:text-slate-400 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
@@ -92,7 +92,7 @@ export default function Login(props: Props) {
       </label>
       <br />
       <label>
-        {/*  password: */}
+        password:
         <div>
           <input
             className=" border-slate-400 rounded placeholder:italic placeholder:text-slate-400 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"

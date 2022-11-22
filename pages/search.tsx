@@ -31,6 +31,7 @@ export default function SearchPage() {
 
   return (
     <div>
+      <h1>Search Profiles</h1>
       <SearchForm
         searchFormState={searchFormState}
         setSearchFormState={setSearchFormState}

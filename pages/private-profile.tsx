@@ -191,7 +191,7 @@ export default function UserProfile(props: Props) {
 
       <div css={inputContainerStyles}>
         <p className="text-xl">Add your books:</p>
-        <label>
+        <label id="Author">
           <br />
           <input
             className="border-slate-400 rounded
@@ -206,7 +206,7 @@ export default function UserProfile(props: Props) {
         </label>
         <br />
 
-        <label>
+        <label id="Title">
           <br />
           <input
             className="border-slate-400 rounded placeholder:font-sans
@@ -268,7 +268,7 @@ export default function UserProfile(props: Props) {
                 <input
                   type="checkbox"
                   name="options"
-                  id="options"
+                  data-testid="options"
                   className="peer"
                 />
 
@@ -319,7 +319,7 @@ export default function UserProfile(props: Props) {
           className="btn"
           onClick={() => deleteUserFromApiById(props.user!.id)}
         >
-          delete
+          delete profile
         </button>
       </div>
     </>

@@ -15,9 +15,10 @@ const SearchForm = ({ searchFormState, setSearchFormState }) => {
         </label>
         <input
           id="user-search"
+          data-testid="user-search-bar"
           className="form-input w-full pl-9 focus:border-slate-300"
           type="search"
-          placeholder="Search users…"
+          placeholder="Search profiles…"
           value={searchFormState}
           onChange={(event) => {
             setSearchFormState(event.target.value);
