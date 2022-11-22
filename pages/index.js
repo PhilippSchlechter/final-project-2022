@@ -17,7 +17,7 @@ export default function Home() {
         <title>Home</title>
         <meta name="Homepage" content="Landing page bookshelf app" />
       </Head>
-      <h1 className="m-5">bookshelf</h1>
+      <h1 className="m-5">bookshelves</h1>
       <Image
         src="/1-bookshelf.png"
         alt="bookshelf-logo black and white"
