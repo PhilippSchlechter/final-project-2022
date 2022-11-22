@@ -30,7 +30,7 @@ const textAreaStyles = css`
 `;
 
 type Props = {
-  book: Book | never;
+  book: Book;
   error: string;
 };
 
@@ -65,12 +65,11 @@ export default function SingleBook(props: Props) {
       }),
     });
     const bookCommentFromApi = (await response.json()) as Book['comment'];
-    console.log('bookCommentFromApi', bookCommentFromApi);
 
     setComment(bookCommentFromApi);
   }
 
-  const isCommentOnEdit = /* onEditId === */ props.book.id;
+  const isCommentOnEdit = props.book.id;
 
   return (
     <div>

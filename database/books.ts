@@ -5,7 +5,7 @@ export type Book = {
   author: string;
   title: string;
   userId: number;
-  comment: string | undefined;
+  comment: string /*  | undefined */;
 };
 
 export type User = {
