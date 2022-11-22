@@ -1,20 +1,20 @@
 import { css } from '@emotion/react';
-import { GetServerSidePropsContext } from 'next';
+/* import { GetServerSidePropsContext } from 'next'; */
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
-import { Book, getBooksByUserId } from '../database/books';
+import { /* Book, */ getBooksByUserId } from '../database/books';
 import { getValidSessionByToken } from '../database/sessions';
-import { getUserBySessionToken, User } from '../database/users';
+import { getUserBySessionToken /*  User  */ } from '../database/users';
 
-type Props = {
-  user: User | undefined;
+/* type Props = {
+  user: User;
   books: Book[];
   refreshUserProfile: () => Promise<void>;
   errors: { message: string }[];
-};
+}; */
 
 const inputDisplayStyles = css`
   background-color: white;
@@ -60,16 +60,16 @@ const deleteStyles = css`
   padding: 20px 50px 30px 350px;
 `;
 
-export default function UserProfile(props: Props) {
+export default function UserProfile(props /* : Props */) {
   const router = useRouter();
 
-  const [books, setBooks] = useState<Book[]>(props.books);
+  const [books, setBooks] = useState(/* <Book[]> */ props.books);
   const [authorInput, setAuthorInput] = useState('');
   const [titleInput, setTitleInput] = useState('');
 
   const [authorOnEditInput, setAuthorOnEditInput] = useState('');
   const [titleOnEditInput, setTitleOnEditInput] = useState('');
-  const [onEditId, setOnEditId] = useState<number | undefined>();
+  const [onEditId, setOnEditId] = useState /* <number | undefined> */();
 
   /* if (!props.user) {
     return (
@@ -83,7 +83,7 @@ export default function UserProfile(props: Props) {
     );
   } */
 
-  async function deleteUserFromApiById(id: number) {
+  async function deleteUserFromApiById(id /* : number */) {
     await fetch(`/api/profiles/${id}`, {
       method: 'DELETE',
       body: JSON.stringify({
@@ -106,10 +106,10 @@ export default function UserProfile(props: Props) {
       body: JSON.stringify({
         author: authorInput,
         title: titleInput,
-        id: props.user!.id,
+        id: props.user.id,
       }),
     });
-    const bookFromApi = (await response.json()) as Book;
+    const bookFromApi = await response.json(); /*  as Book */
 
     // TODO handle the error when book from Api is undefined
     // you can check if bookFromApi contains an error and display the error in the front end
@@ -119,12 +119,12 @@ export default function UserProfile(props: Props) {
     setBooks(newState);
   }
   // check body !!!!!
-  async function deleteBookFromApiById(id: number) {
+  async function deleteBookFromApiById(id /* : number */) {
     const response = await fetch(`/api/books/${id}`, {
       method: 'DELETE',
       body: JSON.stringify({ id: id }),
     });
-    const deletedBook = (await response.json()) as Book;
+    const deletedBook = await response.json(); /*  as Book */
 
     const filteredBooks = books.filter((book) => {
       return book.id !== deletedBook.id;
@@ -133,7 +133,7 @@ export default function UserProfile(props: Props) {
     setBooks(filteredBooks);
   }
 
-  async function updateBookFromApiById(id: number) {
+  async function updateBookFromApiById(id /* : number */) {
     const response = await fetch(`/api/books/${id}`, {
       method: 'PUT',
       headers: {
@@ -144,7 +144,7 @@ export default function UserProfile(props: Props) {
         title: titleOnEditInput,
       }),
     });
-    const updatedBookFromApi = (await response.json()) as Book;
+    const updatedBookFromApi = await response.json(); /*  as Book */
 
     // TODO handle the error when book from api is undefined
     // you can check if bookFromApi contains an error and display the error in the front end
@@ -177,7 +177,7 @@ export default function UserProfile(props: Props) {
         <meta name="description" content="Private bookshelf of the user" />
       </Head>
       <div css={topContainerStyles}>
-        <h1 css={h1Styles}>{props.user!.username}'s bookshelf</h1>
+        <h1 css={h1Styles}>{props.user.username}'s bookshelf</h1>
 
         {/* Admin input down below */}
         <Image
@@ -317,7 +317,7 @@ export default function UserProfile(props: Props) {
         Delete Account:
         <button
           className="btn"
-          onClick={() => deleteUserFromApiById(props.user!.id)}
+          onClick={() => deleteUserFromApiById(props.user.id)}
         >
           delete profile
         </button>
@@ -328,7 +328,9 @@ export default function UserProfile(props: Props) {
 
 // delete User by Session Token?
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(
+  context /* : GetServerSidePropsContext */,
+) {
   const token = context.req.cookies.sessionToken;
   const session = token && (await getValidSessionByToken(token));
   const user = token && (await getUserBySessionToken(token));
