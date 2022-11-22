@@ -5,7 +5,7 @@ import { expect, test } from '@playwright/test';
     - register as a new test-user, create a book, delete a book, search for a user, view user profile, public and private, delete test-user at the end and return back to home
  */
 
-test('navigation test', async ({ page }) => {
+/* test('navigation test', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
   await expect(page.locator('h1')).toHaveText('bookshelves');
@@ -45,4 +45,4 @@ test('navigation and functionality test', async ({ page }) => {
   await page.locator('a:has-text("My Bookshelf")').click();
   await page.getByRole('button', { name: 'delete profile' }).click();
   await expect(page).toHaveURL('http://localhost:3000');
-});
+}); */

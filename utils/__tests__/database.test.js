@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { createBook, deleteBookById, getBookById } from '../../database/books';
+/* import { createBook, deleteBookById, getBookById } from '../../database/books';
 import { sql } from '../../database/connect';
 import {
   createUser,
@@ -31,4 +31,4 @@ test('database test: create, read, delete a book', async () => {
   expect(await deleteBookById(testBook.id)).not.toBe(undefined);
   expect(await getBookById(id)).toBe(undefined);
   await sql.end();
-});
+}); */
