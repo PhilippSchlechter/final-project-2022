@@ -30,7 +30,7 @@ const textAreaStyles = css`
 `;
 
 type Props = {
-  book: Book;
+  book: Book | never;
   error: string;
 };
 
