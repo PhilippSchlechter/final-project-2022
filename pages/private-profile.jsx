@@ -5,9 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
-import { /* Book, */ getBooksByUserId } from '../database/books';
+import { getBooksByUserId } from '../database/books';
 import { getValidSessionByToken } from '../database/sessions';
-import { getUserBySessionToken /*  User  */ } from '../database/users';
+import { getUserBySessionToken } from '../database/users';
 
 /* type Props = {
   user: User;
