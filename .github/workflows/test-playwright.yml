@@ -1,4 +1,4 @@
-name: Playwright Tests, Deploy
+name: Playwright Tests
 on: push
 
 jobs:
@@ -35,12 +35,6 @@ jobs:
       # Also generates next-env.d.ts, required for tsc
       - name: Build localhost
         run: yarn build
-      - name: Run TypeScript Compiler
-        run: yarn tsc
-      - name: Run ESLint
-        run: yarn eslint . --max-warnings 0
-      - name: Run Stylelint
-        run: yarn stylelint '**/*.{css,scss,less,js,tsx}'
       - name: Install Playwright
         run: yarn playwright install --with-deps
       - name: Run tests
