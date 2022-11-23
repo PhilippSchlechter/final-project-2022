@@ -14,7 +14,6 @@
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
     "@next/font": "^13.0.3",
-    "@ts-safeql/eslint-plugin": "^0.0.21",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie": "^0.5.1",
     "autoprefixer": "^10.4.13",
