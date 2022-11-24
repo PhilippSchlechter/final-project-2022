@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Footer from './Footer';
 import Header from './Header';
 
 const mainStyles = css`
@@ -16,6 +17,7 @@ export default function Layout(props) {
       <Header user={props.user} />
       {/* main styles for all pages */}
       <main css={mainStyles}>{props.children}</main>
+      <Footer />
     </>
   );
 }

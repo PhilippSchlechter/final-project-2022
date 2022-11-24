@@ -1,75 +1,75 @@
 import { css } from '@emotion/react';
-/* import { GetServerSidePropsContext } from 'next'; */
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
-import { getBooksByUserId } from '../database/books';
+import { Book, getBooksByUserId } from '../database/books';
 import { getValidSessionByToken } from '../database/sessions';
-import { getUserBySessionToken } from '../database/users';
+import { getUserBySessionToken, User } from '../database/users';
 
-/* type Props = {
+type Props = {
   user: User;
   books: Book[];
   refreshUserProfile: () => Promise<void>;
   errors: { message: string }[];
-}; */
+};
 
 const inputDisplayStyles = css`
-  background-color: white;
-
   margin-left: 5px;
   margin-top: 3px;
   border-radius: 4px;
 
   border: 1px solid #ccc;
-
-  color: black;
 `;
 
 const bookListStyles = css`
-  border: 1px solid #ccc;
+  border: 2px solid #5a5858;
   border-radius: 7px;
-  width: 850px;
+  width: 1000px;
   height: 700px;
-  background-color: #fbf5f888; /* #eee7ec */
   margin: 0 auto;
   padding: 20px 0 0 200px;
 `;
-/* const createBookStyles = css`
-  padding: 20px 0 0 200px;
-`; */
 
-const h1Styles = css`
-  padding: 20px 0 30px 20px;
-`;
 const topContainerStyles = css`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  border-bottom: solid 2px black;
+  margin-left: 170px;
+  margin-right: 170px;
+  margin-bottom: 100px;
+  margin-top: 40px;
+  h1 {
+    margin-right: 190px;
+  }
+  img {
+    margin-right: 30px;
+  }
 `;
 const imageStyles = css`
   margin-top: 50px;
 `;
 const inputContainerStyles = css`
-  margin-left: 220px;
-  margin-bottom: 20px;
+  margin-left: 430px;
+  margin-bottom: 40px;
 `;
 
 const deleteStyles = css`
-  padding: 20px 50px 30px 350px;
+  padding: 20px 50px 30px 50px;
 `;
 
-export default function UserProfile(props /* : Props */) {
+export default function UserProfile(props: Props) {
   const router = useRouter();
 
-  const [books, setBooks] = useState(/* <Book[]> */ props.books);
+  const [books, setBooks] = useState<Book[]>(props.books);
   const [authorInput, setAuthorInput] = useState('');
   const [titleInput, setTitleInput] = useState('');
 
   const [authorOnEditInput, setAuthorOnEditInput] = useState('');
   const [titleOnEditInput, setTitleOnEditInput] = useState('');
-  const [onEditId, setOnEditId] = useState /* <number | undefined> */();
+  const [onEditId, setOnEditId] = useState<number | undefined>();
 
   /* if (!props.user) {
     return (
@@ -83,7 +83,7 @@ export default function UserProfile(props /* : Props */) {
     );
   } */
 
-  async function deleteUserFromApiById(id /* : number */) {
+  async function deleteUserFromApiById(id: number) {
     await fetch(`/api/profiles/${id}`, {
       method: 'DELETE',
       body: JSON.stringify({
@@ -109,22 +109,19 @@ export default function UserProfile(props /* : Props */) {
         id: props.user.id,
       }),
     });
-    const bookFromApi = await response.json(); /*  as Book */
-
-    // TODO handle the error when book from Api is undefined
-    // you can check if bookFromApi contains an error and display the error in the front end
+    const bookFromApi = (await response.json()) as Book;
 
     const newState = [...books, bookFromApi];
 
     setBooks(newState);
   }
-  // check body !!!!!
-  async function deleteBookFromApiById(id /* : number */) {
+
+  async function deleteBookFromApiById(id: number) {
     const response = await fetch(`/api/books/${id}`, {
       method: 'DELETE',
       body: JSON.stringify({ id: id }),
     });
-    const deletedBook = await response.json(); /*  as Book */
+    const deletedBook = (await response.json()) as Book;
 
     const filteredBooks = books.filter((book) => {
       return book.id !== deletedBook.id;
@@ -133,7 +130,7 @@ export default function UserProfile(props /* : Props */) {
     setBooks(filteredBooks);
   }
 
-  async function updateBookFromApiById(id /* : number */) {
+  async function updateBookFromApiById(id: number) {
     const response = await fetch(`/api/books/${id}`, {
       method: 'PUT',
       headers: {
@@ -144,10 +141,7 @@ export default function UserProfile(props /* : Props */) {
         title: titleOnEditInput,
       }),
     });
-    const updatedBookFromApi = await response.json(); /*  as Book */
-
-    // TODO handle the error when book from api is undefined
-    // you can check if bookFromApi contains an error and display the error in the front end
+    const updatedBookFromApi = (await response.json()) as Book;
 
     const newState = books.map((book) => {
       if (book.id === updatedBookFromApi.id) {
@@ -177,9 +171,8 @@ export default function UserProfile(props /* : Props */) {
         <meta name="description" content="Private bookshelf of the user" />
       </Head>
       <div css={topContainerStyles}>
-        <h1 css={h1Styles}>{props.user.username}'s bookshelf</h1>
+        <h1>{props.user.username}'s bookshelf</h1>
 
-        {/* Admin input down below */}
         <Image
           src="/1-bookshelf.png"
           alt=""
@@ -232,7 +225,7 @@ export default function UserProfile(props /* : Props */) {
       <br />
       <br />
       <div
-        className="border-slate-400 shadow-lg display: block"
+        className="border-slate-700 shadow-lg display: block bg-[#d0a3bf46] "
         css={bookListStyles}
       >
         {/* <p className="text-xl">Author - Title</p> */}
@@ -241,7 +234,7 @@ export default function UserProfile(props /* : Props */) {
 
           return (
             <Fragment key={book.id}>
-              <div className="py-2">
+              <div className="py-2 mt-3">
                 <input
                   css={inputDisplayStyles}
                   className="border-slate-400 rounded
@@ -268,8 +261,9 @@ export default function UserProfile(props /* : Props */) {
                 <input
                   type="checkbox"
                   name="options"
+                  value=""
                   data-testid="options"
-                  className="peer"
+                  className="peer text-red-600 bg-red-500"
                 />
 
                 <button
@@ -304,7 +298,7 @@ export default function UserProfile(props /* : Props */) {
                   className="invisible peer-checked:visible"
                   href={`/books/${book.id}`}
                 >
-                  ➜
+                  <button className="btn py-1">template ➜</button>
                 </Link>
                 <br />
               </div>
@@ -312,7 +306,7 @@ export default function UserProfile(props /* : Props */) {
           );
         })}
       </div>
-
+      <div className="my-24 mx-8 shadow-md border-solid border-l-0 border-r-0 border-b-2 border-t-0" />
       <div css={deleteStyles}>
         Delete Account:
         <button
@@ -326,11 +320,7 @@ export default function UserProfile(props /* : Props */) {
   );
 }
 
-// delete User by Session Token?
-
-export async function getServerSideProps(
-  context /* : GetServerSidePropsContext */,
-) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const token = context.req.cookies.sessionToken;
   const session = token && (await getValidSessionByToken(token));
   const user = token && (await getUserBySessionToken(token));

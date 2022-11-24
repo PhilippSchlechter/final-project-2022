@@ -16,7 +16,7 @@ test('navigation test', async ({ page }) => {
   await expect(page).toHaveURL('http://localhost:3000/login');
   await expect(page.locator('h1')).toHaveText('Login');
   await page.locator('button', { hasText: 'Login' }).click();
-  await page.locator('a:has-text("sign up here")').click();
+  await page.locator('a:has-text("Register")').click();
   await expect(page).toHaveURL('http://localhost:3000/register');
   await expect(page.locator('h1')).toHaveText('Register');
   await page.locator('a:has-text("Login")').click();
@@ -36,7 +36,7 @@ test('navigation and functionality test', async ({ page }) => {
   await page.locator('button', { hasText: 'add' }).click();
   await page.getByTestId('options').click();
   await page.getByRole('button', { name: 'delete' }).first().click();
-  await page.locator('a:has-text("Search Profiles")').click();
+  await page.locator('a:has-text("Search")').click();
   await expect(page).toHaveURL('http://localhost:3000/search');
   await expect(page.locator('h1')).toHaveText('Search Profiles');
   await page.getByTestId('user-search-bar').fill('usertest');

@@ -9,14 +9,14 @@ const SearchForm = ({ searchFormState, setSearchFormState }) => {
 
   return (
     <div className="mb-5">
-      <form className="relative" onSubmit={handleSubmit}>
-        <label htmlFor="user-search" className="sr-only">
+      <form className="flex" onSubmit={handleSubmit}>
+        <label htmlFor="user-search" className="sr-only flex">
           Search
         </label>
         <input
           id="user-search"
           data-testid="user-search-bar"
-          className="form-input w-full pl-9 focus:border-slate-300"
+          className="form-input font-sans font-semibold text-base px-12 py-2 focus:border-slate-300 border-slate-400 mx-auto mb-8"
           type="search"
           placeholder="Search profiles…"
           value={searchFormState}
@@ -24,10 +24,6 @@ const SearchForm = ({ searchFormState, setSearchFormState }) => {
             setSearchFormState(event.target.value);
           }}
         />
-        {/* <button
-          className="absolute inset-0 right-auto group"
-          aria-label="Search"
-        /> */}
       </form>
     </div>
   );

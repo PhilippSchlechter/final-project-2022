@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { Book, getBookById } from '../../../../database/books';
 import { getUserByUsername, User } from '../../../../database/users';
 import { parseIntFromContextQuery } from '../../../../utils/contextQuery';
@@ -11,11 +12,11 @@ type Props = {
 };
 
 const bookStyles = css`
-  height: 1000px;
-  width: 650px;
+  height: 830px;
+  width: 530px;
   border-radius: 15px;
-  background-color: #fbf5f888;
-  border: 2px solid #ccc;
+  /* background-color: #fbf5f888; */
+  /* border: 2px solid #ccc; */
   padding: 20px;
   h1 {
     margin-top: 50px;
@@ -48,14 +49,25 @@ export default function UserProfile(props: Props) {
         <title>{nameToUpperCase2}'s Bookshelf</title>
         <meta name="description" content="Biography of the person" />
       </Head>
-      <div css={bookStyles} className="shadow-md">
-        <h1>{props.book.title}</h1>
-        <h2>{props.book.author}</h2>
-        <br />
-        <br />
-        <br />
-        <h3>Key Takeaways</h3>
-        <p>{props.book.comment}</p>
+      <Link href={`/profile/${props.user.username}`}>
+        <p className="font-semibold text-lg ml-32 mb-5 underline underline-offset-4">
+          {props.user.username}'s bookshelf
+        </p>
+      </Link>
+      <div
+        css={bookStyles}
+        className=" flex mx-auto border-solid mt-20 border-slate-700
+      shadow-md bg-[#d0a3bf46]"
+      >
+        <div className="flex-row pl-3">
+          <h1>{props.book.title}</h1>
+          <h2>{props.book.author}</h2>
+          <h3 className="mt-36 mb-8">Key Takeaways</h3>
+
+          <p className="font-sans text-sm leading-6 font-semibold pr-6">
+            {props.book.comment}
+          </p>
+        </div>
       </div>
     </>
   );

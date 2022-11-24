@@ -7,6 +7,8 @@ test('add two numbers together', () => {
 });
 
 // work on playwright test first
+// connect ECONNREFUSED ::1:5432 (github actions)
+// tests work on localhost
 /**
  * @jest-environment node
  */

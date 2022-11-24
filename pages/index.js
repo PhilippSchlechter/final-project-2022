@@ -1,14 +1,23 @@
+import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 
-/* const imageStyles = css`
+const topContainerStyles = css`
   display: flex;
-  justify-content: center;
-  margin-top: 150px;
-  margin-right: 300px;
-`; */
-
-/* const iconStyles = css``; */
+  justify-content: space-evenly;
+  border-bottom: solid 3px black;
+  margin-left: 180px;
+  margin-right: 180px;
+  margin-bottom: 100px;
+  margin-top: 240px;
+  h1 {
+    margin-right: 190px;
+    margin-bottom: 30px;
+  }
+  img {
+    margin-right: 30px;
+  }
+`;
 
 export default function Home() {
   return (
@@ -17,17 +26,17 @@ export default function Home() {
         <title>Home</title>
         <meta name="Homepage" content="Landing page bookshelf app" />
       </Head>
-      <h1 className="m-5">bookshelves</h1>
-      <Image
-        src="/1-bookshelf.png"
-        alt="bookshelf-logo black and white"
-        width="240"
-        height="240"
-        className=""
-      />
-      <br />
-      <br />
-      <br />
+      <div css={topContainerStyles}>
+        <h1 className="text-6xl">bookshelves </h1>
+
+        <Image
+          src="/1-bookshelf.png"
+          alt="bookshelf-logo black and white"
+          width="240"
+          height="240"
+        />
+      </div>
+      {/* <h2>Create your own bookshelf</h2> */}
     </div>
   );
 }

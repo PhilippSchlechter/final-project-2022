@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Book, getBooksByUserId } from '../../database/books';
 import { getUserByUsername, User } from '../../database/users';
@@ -18,6 +19,21 @@ const bookStyles = css`
   .myDIV:hover + .hide {
     display: block;
     color: red;
+  }
+`;
+const topContainerStyles = css`
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: solid 2px black;
+  margin-left: 170px;
+  margin-right: 170px;
+  margin-bottom: 100px;
+  margin-top: 40px;
+  h1 {
+    margin-right: 190px;
+  }
+  img {
+    margin-right: 30px;
   }
 `;
 
@@ -46,23 +62,34 @@ export default function UserProfile(props: Props) {
         <title>{nameToUpperCase2}'s Bookshelf</title>
         <meta name="description" content="Biography of the person" />
       </Head>
-      <h1>{props.user.username}'s bookshelf:</h1>
-      <hr />
-      <div css={bookStyles}>
+      <div css={topContainerStyles}>
+        <h1>{props.user.username}'s bookshelf</h1>
+        <Image src="/1-bookshelf.png" alt="" width="200" height="200" />
+      </div>
+
+      <div className="grid px-10 " css={bookStyles}>
         {books.map((book) => {
           return (
             <div
-              className="my-5 mx-1 first-letter:uppercase"
+              className=" flex flex-col items-center rounded bg-[#d0a3bf46] first-letter:uppercase py-4 border-solid border-2 mx-96 border-b-0 last-of-type:border-b-2"
               key={`${book}${book.userId}`}
             >
-              ▪️ {book.author} - {book.title}
-              <Link href={`/profile/user/${props.user!.username}/${book.id}`}>
-                ➜
-              </Link>
+              <span>
+                ▪️ {book.author} - {book.title}
+                <Link
+                  className="ml-1"
+                  href={`/profile/user/${props.user!.username}/${book.id}`}
+                >
+                  ➜
+                </Link>
+              </span>
             </div>
           );
         })}
       </div>
+      {/*  <div className="flex flex-col items-center mx-96 py-3 border-solid border-l-2 border-r-2 border-b-0 border-t-0">
+        -
+      </div> */}
     </>
   );
 }

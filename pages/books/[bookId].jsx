@@ -7,11 +7,9 @@ import { getUserBySessionToken } from '../../database/users';
 import { parseIntFromContextQuery } from '../../utils/contextQuery';
 
 const bookStyles = css`
-  height: 1000px;
-  width: 650px;
+  height: 830px;
+  width: 530px;
   border-radius: 15px;
-  background-color: #fbf5f888;
-  border: 2px solid #ccc;
   padding: 20px;
   h1 {
     margin-top: 50px;
@@ -22,10 +20,9 @@ const bookStyles = css`
   }
 `;
 const textAreaStyles = css`
-  height: 300px;
-  width: 450px;
-  background-color: white;
-  border: 1px solid #ccc;
+  height: 360px;
+  width: 430px;
+  border: 1px solid black;
   border-radius: 5px;
 `;
 
@@ -79,42 +76,47 @@ export default function SingleBook(props /* : Props */) {
         <title>My Book Templates</title>
         <meta name="description" content="Book template" />
       </Head>
-      <div css={bookStyles} className="shadow-md">
-        <h1>{props.book.title}</h1>
-        <h2>{props.book.author}</h2>
-        <br />
-        <br />
-        <br />
-        <h3>Key Takeaways</h3>
+      <div
+        css={bookStyles}
+        className="shadow-md flex mx-auto border-solid mt-20 border-slate-700 bg-[#d0a3bf46]"
+      >
+        <div className="pl-3">
+          <h1>{props.book.title}</h1>
+          <h2>{props.book.author}</h2>
 
-        <div>
-          <textarea
-            css={textAreaStyles}
-            className="font-sans "
-            value={isCommentOnEdit ? commentOnEditInput : props.book.comment}
-            disabled={!isCommentOnEdit}
-            onChange={(event) => {
-              setCommentOnEditInput(event.currentTarget.value);
-            }}
-          />
-          <br />
-          {!commentOnEditInput ? (
-            <button
-              onClick={() => {
-                setCommentOnEditInput(props.book.comment);
+          <h3 className="mt-32 mb-6">Key Takeaways</h3>
+
+          <div className="flex-row">
+            <textarea
+              css={textAreaStyles}
+              className="font-sans text-sm leading-6 font-semibold bg-[#d0a3bf0f] p-2"
+              value={isCommentOnEdit ? commentOnEditInput : props.book.comment}
+              disabled={!isCommentOnEdit}
+              onChange={(event) => {
+                setCommentOnEditInput(event.currentTarget.value);
               }}
-            >
-              edit
-            </button>
-          ) : (
-            <button
-              onClick={async () => {
-                await createBookCommentFromApi(props.book.id);
-              }}
-            >
-              save
-            </button>
-          )}
+            />
+            <br />
+            {!commentOnEditInput ? (
+              <button
+                className="rounded-lg text-sm font-medium py-1 px-3 bg-slate-900 text-white hover:bg-slate-700"
+                onClick={() => {
+                  setCommentOnEditInput(props.book.comment);
+                }}
+              >
+                edit
+              </button>
+            ) : (
+              <button
+                className="rounded-lg text-sm font-normal mt-2 py-1 px-3 bg-slate-900 text-white hover:bg-slate-700"
+                onClick={async () => {
+                  await createBookCommentFromApi(props.book.id);
+                }}
+              >
+                save
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

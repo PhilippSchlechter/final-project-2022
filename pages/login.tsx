@@ -59,7 +59,11 @@ export default function Login(props: Props) {
         <title>Login</title>
         <meta name="description" content="login users" />
       </Head>
-      <h1>Login</h1>
+      <div className="flex">
+        <h1 className="mx-auto mb-24 mt-36 text-4xl underline underline-offset-4">
+          Login
+        </h1>
+      </div>
       {errors.map((error) => {
         return (
           <p
@@ -76,52 +80,57 @@ export default function Login(props: Props) {
           </p>
         );
       })}
+      <div className="">
+        <div className="flex">
+          <label className="mx-auto">
+            <p className="mx-auto text-lg">username:</p>
+            <input
+              className="border-slate-400 font-sans font-semibold mx-auto mb-4 rounded placeholder:font-sans comfortaa placeholder:text-slate-400 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
+              value={username}
+              onChange={(event) => {
+                setUsername(event.currentTarget.value.toLowerCase());
+              }}
+            />
+          </label>
+        </div>
+        <br />
+        <div className="flex">
+          <label className="mx-auto">
+            <p className="mx-auto text-lg">password:</p>
 
-      <label>
-        username:
-        <div>
-          <input
-            className="border-slate-400 rounded placeholder:font-sans comfortaa placeholder:text-slate-400 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
-            placeholder="Username"
-            value={username}
-            onChange={(event) => {
-              setUsername(event.currentTarget.value.toLowerCase());
-            }}
-          />
+            <input
+              className=" border-slate-400 mx-auto mb-8 rounded placeholder:italic placeholder:text-slate-400 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
+              type="password"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.currentTarget.value);
+              }}
+            />
+          </label>
         </div>
-      </label>
-      <br />
-      <label>
-        password:
-        <div>
-          <input
-            className=" border-slate-400 rounded placeholder:italic placeholder:text-slate-400 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
-            placeholder="Password"
-            type="password"
-            value={password}
-            onChange={(event) => {
-              setPassword(event.currentTarget.value);
+        <br />
+        <div className="flex">
+          <button
+            className="mx-auto mb-20 rounded-lg text-sm font-medium py-1.5 px-4 tracking-wide bg-slate-900 text-white hover:bg-slate-700"
+            onClick={async () => {
+              await loginHandler();
             }}
-          />
+          >
+            Login
+          </button>
         </div>
-      </label>
-      <br />
-      <button
-        onClick={async () => {
-          await loginHandler();
-        }}
-      >
-        Login
-      </button>
-      <p>
-        no account yet?
-        <Link
-          className="pl-1 text-violet-500 hover:text-violet-600 active:text-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
-          href="/register"
-        >
-          sign up here
-        </Link>
-      </p>
+        <div className="flex">
+          <p className="mx-auto text-lg">
+            no account yet?
+            <Link
+              className="pl-1 text-[#9c6f8aea] hover:text-violet-600 active:text-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
+              href="/register"
+            >
+              sign up here
+            </Link>
+          </p>
+        </div>
+      </div>
     </>
   );
 }

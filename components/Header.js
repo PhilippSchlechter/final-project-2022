@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 const navStyles = css`
   border-radius: 5px;
-  margin: 30px 20px;
-  padding: 25px;
+  margin: 30px 50px;
+  padding: 30px;
   display: flex;
 
   a {
@@ -13,17 +13,14 @@ const navStyles = css`
   }
 
   > a + a {
-    margin-left: 20px;
+    margin-left: 30px;
   }
   > div {
     margin-right: auto;
     display: flex;
-    gap: 65px;
+    gap: 75px;
   }
 `;
-/* const iconStyles = css`
-  margin-top: 6px;
-`; */
 
 function Anchor({ children, ...restProps }) {
   // using a instead of Link since we want to force a full refresh
@@ -32,19 +29,19 @@ function Anchor({ children, ...restProps }) {
 
 export default function Header(props) {
   return (
-    <header>
+    <header className="font-semibold">
       <nav css={navStyles}>
         <div>
           <Link href="/"> Home</Link>
           {/* <Link href={`/profile/${props.user?.username}`}>Profile</Link> */}
-          <Link href="/search">Search Profiles</Link>
+          <Link href="/search">Search</Link>
           <Link href="/private-profile">My Bookshelf</Link>
         </div>
         {props.user && props.user.username}
         {props.user ? (
           <Anchor
             css={css`
-              margin-left: 10px;
+              margin-left: 20px;
             `}
             href="/logout"
           >

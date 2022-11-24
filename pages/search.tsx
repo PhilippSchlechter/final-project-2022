@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import SearchForm from '../components/SearchForm';
@@ -31,12 +32,28 @@ export default function SearchPage() {
 
   return (
     <div>
-      <h1>Search Profiles</h1>
+      <Head>
+        <title>Search Profiles</title>
+        <meta name="Search Profiles" content="register new users" />
+      </Head>
+      <div className="flex">
+        <h1 className="mx-auto my-24 text-4xl underline underline-offset-4">
+          Search Profiles
+        </h1>
+      </div>
+
       <SearchForm
         searchFormState={searchFormState}
         setSearchFormState={setSearchFormState}
       />
-      <button onClick={() => searchUsersByApi(searchFormState)}>search</button>
+      <div className="flex">
+        <button
+          className="mx-auto mb-20 mt-8 rounded-lg text-sm font-medium py-1.5 px-4 tracking-wide bg-slate-900 text-white hover:bg-slate-700"
+          onClick={() => searchUsersByApi(searchFormState)}
+        >
+          Search
+        </button>
+      </div>
       {errors.map((error) => {
         return (
           <p id="hideMeAfter5Seconds" key={error.message}>
