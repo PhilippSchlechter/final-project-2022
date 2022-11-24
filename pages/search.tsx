@@ -48,7 +48,7 @@ export default function SearchPage() {
       />
       <div className="flex">
         <button
-          className="mx-auto mb-20 mt-8 rounded-lg text-sm font-medium py-1.5 px-4 tracking-wide bg-slate-900 text-white hover:bg-slate-700"
+          className="mx-auto mt-3 rounded-lg text-sm font-medium py-1.5 px-4 tracking-wide bg-slate-900 text-white hover:bg-slate-700"
           onClick={() => searchUsersByApi(searchFormState)}
         >
           Search
@@ -56,9 +56,11 @@ export default function SearchPage() {
       </div>
       {errors.map((error) => {
         return (
-          <p id="hideMeAfter5Seconds" key={error.message}>
-            {error.message}
-          </p>
+          <div key={error.message} className="flex">
+            <p className="mx-auto rounded mt-5" id="hideMeAfter5Seconds">
+              {error.message}
+            </p>
+          </div>
         );
       })}
     </div>
