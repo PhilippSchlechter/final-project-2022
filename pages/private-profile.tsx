@@ -202,7 +202,7 @@ export default function UserProfile(props: Props) {
         <label id="Title">
           <br />
           <input
-            className="border-slate-400 rounded placeholder:font-sans
+            className="border-slate-400 rounded font-sans
             placeholder:text-slate-500 bg-white border py-2 pl-7 pr-3 shadow-sm focus:outline-none focus:border-black-500 focus:ring-black-500 focus:ring-1 sm:text-sm"
             placeholder="Title"
             value={titleInput}
