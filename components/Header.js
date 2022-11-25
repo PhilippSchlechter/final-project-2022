@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const navStyles = css`
   border-radius: 5px;
-  margin: 30px 50px;
+  margin: 45px 120px;
   padding: 30px;
   display: flex;
 
@@ -13,12 +13,12 @@ const navStyles = css`
   }
 
   > a + a {
-    margin-left: 30px;
+    margin-left: 50px;
   }
   > div {
     margin-right: auto;
     display: flex;
-    gap: 75px;
+    gap: 100px;
   }
 `;
 

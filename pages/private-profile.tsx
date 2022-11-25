@@ -37,8 +37,8 @@ const topContainerStyles = css`
   display: flex;
   justify-content: space-evenly;
   border-bottom: solid 2px black;
-  margin-left: 170px;
-  margin-right: 170px;
+  margin-left: 450px;
+  margin-right: 450px;
   margin-bottom: 100px;
   margin-top: 40px;
   h1 {
@@ -52,7 +52,7 @@ const imageStyles = css`
   margin-top: 50px;
 `;
 const inputContainerStyles = css`
-  margin-left: 430px;
+  margin-left: 750px;
   margin-bottom: 40px;
 `;
 

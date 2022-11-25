@@ -6,8 +6,8 @@ const topContainerStyles = css`
   display: flex;
   justify-content: space-evenly;
   border-bottom: solid 3px black;
-  margin-left: 180px;
-  margin-right: 180px;
+  margin-left: 270px;
+  margin-right: 270px;
   margin-bottom: 100px;
   margin-top: 240px;
   h1 {

@@ -37,7 +37,7 @@ export default function SearchPage() {
         <meta name="Search Profiles" content="register new users" />
       </Head>
       <div className="flex">
-        <h1 className="mx-auto my-24 text-4xl underline underline-offset-4">
+        <h1 className="mx-auto mb-24 mt-36 text-4xl underline underline-offset-4">
           Search Profiles
         </h1>
       </div>

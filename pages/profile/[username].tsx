@@ -36,6 +36,10 @@ const topContainerStyles = css`
     margin-right: 30px;
   }
 `;
+const listStyles = css`
+  margin-left: 750px;
+  margin-right: 750px;
+`;
 
 export default function UserProfile(props: Props) {
   if (!props.user) {
@@ -71,7 +75,8 @@ export default function UserProfile(props: Props) {
         {books.map((book) => {
           return (
             <div
-              className=" flex flex-col items-center rounded bg-[#d0a3bf46] first-letter:uppercase py-4 border-solid border-2 mx-96 border-b-0 last-of-type:border-b-2"
+              css={listStyles}
+              className=" flex flex-col items-center rounded bg-[#d0a3bf46] first-letter:uppercase py-4 border-solid border-2 border-b-0 last-of-type:border-b-2"
               key={`${book}${book.userId}`}
             >
               <span>

@@ -50,7 +50,7 @@ export default function UserProfile(props: Props) {
         <meta name="description" content="Biography of the person" />
       </Head>
       <Link href={`/profile/${props.user.username}`}>
-        <p className="font-semibold text-lg ml-32 mb-5 underline underline-offset-4">
+        <p className="font-semibold text-lg ml-52 mb-5 mt-5 underline underline-offset-4">
           {props.user.username}'s bookshelf
         </p>
       </Link>
